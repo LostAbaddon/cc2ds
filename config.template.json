@@ -1,0 +1,16 @@
+{
+	"server": {
+		"port": 3000,
+		"host": "127.0.0.1"
+	},
+	"target": {
+		"url": "https://api.deepseek.com/anthropic",
+		"apiKey": "your-api-key-here"
+	},
+	"modelMapping": [
+		{ "prefix": "claude-opus", "target": "deepseek-v4-pro" },
+		{ "prefix": "claude-sonnet", "target": "deepseek-v4-pro" },
+		{ "prefix": "claude-haiku", "target": "deepseek-v4-flash" }
+	],
+	"logLevel": "info"
+}

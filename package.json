@@ -1,0 +1,11 @@
+{
+	"name": "cc2deepseek",
+	"version": "1.0.0",
+	"description": "Bridge proxy: Claude Cowork → DeepSeek API，含模型名映射",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "node test/test.js"
+	},
+	"license": "Apache-2.0"
+}
