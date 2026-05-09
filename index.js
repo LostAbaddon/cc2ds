@@ -49,18 +49,28 @@ const forwardRequest = (req, body, callback) => {
 		rejectUnauthorized: false,
 	};
 
+	let settled = false;
+	const once = (err, proxyRes) => {
+		if (settled) {
+			return;
+		}
+		settled = true;
+		callback(err, proxyRes);
+	};
+
 	const proxyReq = https.request(options, (proxyRes) => {
-		callback(null, proxyRes);
+		once(null, proxyRes);
 	});
 
 	proxyReq.on('error', (err) => {
 		log('error', `Upstream error: ${err.message}`);
-		callback(err, null);
+		once(err, null);
 	});
 
-	proxyReq.setTimeout(300000, () => {
+	proxyReq.setTimeout(300000);
+	proxyReq.on('timeout', () => {
 		proxyReq.destroy();
-		callback(new Error('Upstream timeout'), null);
+		once(new Error('Upstream timeout'), null);
 	});
 
 	if (body) {
