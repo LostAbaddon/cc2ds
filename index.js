@@ -122,7 +122,7 @@ const forwardRequest = (model, req, body, callback) => {
 	};
 
 	const proxyReq = https.request(options, (proxyRes) => {
-		log('info', `Redirect: ${model}: DONE`);
+		// log('info', `Redirect: ${model}: DONE`);
 		once(null, proxyRes);
 	});
 
@@ -216,6 +216,7 @@ const server = http.createServer((req, res) => {
 			}
 			catch (e) {
 				log('warn', `Failed to parse request body: ${e.message}`);
+				console.log(body);
 			}
 		}
 
